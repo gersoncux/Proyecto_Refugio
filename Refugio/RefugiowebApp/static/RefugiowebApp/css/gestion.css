@@ -134,7 +134,7 @@ p {
     left: 600;
     width: 60%;
     margin-top: 3rem;
-    background-color: rgb(44, 21, 145);
+    background-color: rgb(17, 15, 170);
     color: cornsilk;
     position: absolute;
   }
@@ -162,7 +162,7 @@ p {
   position: relative;
   padding: 3rem;
   margin: 0.5rem;
-  background-color: rgb(5, 7, 131);
+  background-color: rgb(17, 15, 170);
   color: cornsilk;
 }
 
@@ -229,7 +229,7 @@ p {
 }
 
 .footer {
-   background-color: rgba(44, 13, 182, 0.8);
+   background-color: rgba(18, 15, 170, 0.808);
 }
 
 
@@ -276,4 +276,30 @@ ul.errorlist{
   padding-top: .75rem;
   font-style: italic;
   color: red;
+}
+
+.contenedorFormulario{
+
+  background-color: rgba(18, 15, 170, 0.918);
+
+  width: 55%;
+
+  margin: 15px auto;
+
+  border-radius: 5px;
+
+  padding: 1px 0px;
+}
+
+.contenedorAdvertencia{
+
+  background-color: rgba(18, 15, 170, 0.918);
+
+  width: 55%;
+
+  margin: 15px auto;
+
+  border-radius: 5px;
+
+  padding: 1px 0px;
 }
