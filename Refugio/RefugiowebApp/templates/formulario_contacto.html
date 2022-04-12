@@ -1,0 +1,44 @@
+{% extends "RefugiowebApp/base.html" %}
+
+{% load static %} 
+
+
+{% block content %} 
+    <h1 style="color: rgb(255, 255, 255); text-align: center;" > Contactanos</h1>
+
+    <div>
+
+    </div>
+
+    {% if form.errors %} 
+    <p style="color: red;">Por favor revisa este campo</p>
+
+    {% endif %}
+
+
+        <div class="container">
+            <div class="row">
+              <div class="col-xl-9 mx-auto">
+                <div class="cta-inner text-center rounded">
+                    <form action="" method="POST">{% csrf_token %} 
+                        <div align="center">
+                        <table style="color: rgb(255, 255, 255); text-align: center;">
+                            {{form.as_table}}
+                        </table>
+                        </div>
+                
+                        <div>
+                
+                        </div>
+                
+                        <div style="text-align: center;">
+                        <input type="submit" value="Enviar">
+                        </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+    </form>
+
+{% endblock %}

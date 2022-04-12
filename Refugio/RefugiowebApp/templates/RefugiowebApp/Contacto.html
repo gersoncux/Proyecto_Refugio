@@ -5,5 +5,19 @@
 
 {% block content %} 
 
+<h1 style="color:azure">Contactanos</h1>
+
+<form action="/contacto/" method="POST">{% csrf_token %}
+
+    <p style="color: aliceblue;">Asunto: <input type="text"  name="asunto"></p>
+
+    <p>Email: <input type="text"  name="email"></p>
+
+    <p>Mensaje: <textarea name="mensaje" rows="15" cols="45"></textarea></p>
+
+    <input type="submit" value="Enviar">
+
+</form>
+
 
 {% endblock %}
