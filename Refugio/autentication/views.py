@@ -1,33 +1,32 @@
 from django.shortcuts import redirect, render
-from django.views import View
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
+from .forms import CustomUserCreationForm
+from django.contrib import messages
+
 
 # Create your views here.
 
-class VRegistro(View):
+def registro(request):
+    data={
+        'form':CustomUserCreationForm()
+    }
 
-    def get(self, request):
-        form=UserCreationForm
-        return render(request, "registro/Sesion.html",{"form":form})
-
-    def post(self, request):
-        form=UserCreationForm(request.POST)
-
-        if form.is_valid():
-
-            usuario=form.save()
-
-            login(request, usuario)
-
-            return redirect('Home')
-
+    if request.method=='POST':
+        formulario=CustomUserCreationForm(data=request.POST)
+        if formulario.is_valid():
+            formulario.save()
+            user=authenticate(username=formulario.cleaned_data["username"], password=formulario.cleaned_data["password1"])
+            login(request, user)
+            messages.success(request, "Te has registrado correctamente")
+            #Redireccionar al Home
+            return redirect(to="Home")
         else:
-            for msg in form.error_messages:
-                messages.error(request, form.error_messages[msg])
-
-            return render(request, "registro/Sesion.html",{"form":form})
+            for msg in formulario.error_messages:
+                messages.error(request, formulario.error_messages[msg])
+            return render(request, "registro/Sesion.html",{"form":formulario})
+    return render(request, 'registro/Sesion.html', data)
 
 
 def cerrar_sesion(request):

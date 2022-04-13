@@ -9,6 +9,7 @@
     <h1 style="color: beige; text-align: center;" >Inicio de Sesion</h1>
     </div>
 
+
     <form method="post" action="" style="color: white;">
 
         {% csrf_token %} 
@@ -16,7 +17,7 @@
         <div style="width: 35%; margin: auto;">
 
         {{form|crispy}}
-
+        <a style="color: white;" href="{% url 'autentication' %}">Registrate |</a>
         <button type="submit" class="btn btn-success">Login</button>
 
         </div>
