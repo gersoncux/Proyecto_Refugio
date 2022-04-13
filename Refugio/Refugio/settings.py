@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'RefugiowebApp',
     'contactoApp',
+    'autentication',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -135,3 +137,8 @@ EMAIL_HOST_PASSWORD="proyecto1paws"
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+##############################################################
+#Carga de Paquete Crispy en bootstrap
+
+CRISPY_TEMPLATE_PACK='bootstrap4'

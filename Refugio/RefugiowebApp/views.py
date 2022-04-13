@@ -23,9 +23,6 @@ def formularioRegistro(request):
 
     return render(request, "RefugiowebApp/Formulario.html")
 
-def sesion(request):
-
-    return render(request, "RefugiowebApp/Sesion.html")
 
 
 

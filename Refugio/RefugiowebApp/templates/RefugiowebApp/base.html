@@ -19,10 +19,28 @@
 
 <body>
 
+    <div style="text-align: right; margin-right: 100px; color: white;">
+
+      {% if user.is_authenticated %}
+
+      Hola @{{ user.username }} &nbsp;&nbsp; <a href="{% url 'log_out' %}"style="color: white;">Cerrar Sesion</a>
+
+      {% else %} 
+
+      <a href="{% url 'logear' %}" style="color: white;">Login</a>  &nbsp; &nbsp; <a href="{% url 'autentication' %}" style="color: white;">Registrate</a>
+
+      {% endif %}
+    
+    
+    </div>
+
     <h1 class="site-heading text-center text-white d-none d-lg-block">
       
         <span class="site-heading-lower">Refugio Segunda Oportunidad</span>
       </h1>
+
+
+
 
 
  <!-- Navbar -->
@@ -48,9 +66,6 @@
           </li>
           <li class="nav-item {% if request.path == '/Form_Reg/' %}active{% endif %} px-lg-4">
             <a class="nav-link text-uppercase text-expanded" href="{% url 'FormularioRegistro' %}">Formulario</a>
-          </li>
-          <li class="nav-item {% if request.path == '/Inicio_Sesion/' %}active{% endif %} px-lg-4">
-            <a class="nav-link text-uppercase text-expanded" href="{% url 'InicioSesion' %}">Log in</a>
           </li>
          
         </ul>
@@ -96,7 +111,7 @@
         	<a href="sample.html" class="link">Aviso legal</a> ·
         	<a href="sample.html" class="link">Cookies</a>
 		</p>
-        <p class="m-0 mbt1">&copy; Gestión de Pedidos 2020</p>
+        <p class="m-0 mbt1">&copy; Refugio Segunda Oportunidad 2022</p>
       </div>
 	</footer>
 
