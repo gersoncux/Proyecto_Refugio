@@ -1,12 +1,18 @@
-from django.shortcuts import redirect, render
+import profile
+import django
+from django.conf import settings
+from django.shortcuts import redirect, render, get_object_or_404
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
+from django.urls import reverse_lazy
 from .forms import CustomUserCreationForm
-from django.contrib import messages
+from django.contrib.auth.models import User
+from .helpers import send_forget_password_mail
+from .models import Profile
 
 
-# Create your views here.
+################## Create your views here. #################################
 
 def registro(request):
     data={
@@ -29,12 +35,13 @@ def registro(request):
     return render(request, 'registro/Sesion.html', data)
 
 
+
 def cerrar_sesion(request):
     logout(request)
-
     return redirect('Home')
 
 def logear(request):
+
     if request.method=="POST":
         form=AuthenticationForm(request, data=request.POST)
         if form.is_valid():
@@ -51,3 +58,87 @@ def logear(request):
             
     form=AuthenticationForm()
     return render(request, "login/login.html",{"form":form})
+
+
+import uuid
+def ForgetPassword(request):
+    try:
+        if request.method=='POST':
+            username=request.POST.get('username')
+
+            if not User.objects.filter(username=username).first():
+                messages.success(request, 'Nor user found with this username.')
+                return redirect('reset')
+
+            user_obj = User.objects.get(username=username)
+            token=str(uuid.uuid4())
+            profile_obj=Profile.objects.get(user=user_obj)
+            profile_obj.forget_password_token=token
+            profile_obj.save()
+            send_forget_password_mail(user_obj, token)
+            messages.success(request, 'An email is sent.')
+            print("El email, fue enviado correctamente!!!")
+            return render(request, 'login/Ecorreo.html' )
+    except Exception as e:
+        print(e)
+        print("error")
+    return render(request, 'login/resetear.html')
+
+def Ecorreo(request):
+    return render(request, 'login/Ecorreo.html')
+
+
+def ChangePassword(request, token):
+    context={}
+    try:
+        profile_obj=Profile.objects.filter(forget_password_token=token).first()
+        context={'user_id':profile_obj.user.id}
+        print(profile_obj)
+
+        if request.method=='POST':
+            new_password = request.POST.get('new_password')
+            confirm_password = request.POST.get('reconfirm_password')
+            user_id = request.POST.get('user_id')
+
+            if user_id is None:
+                messages.success(request, 'No user id found.')
+                return redirect(f'change_password/{token}/')
+
+            if new_password != confirm_password:
+                messages.success(request, 'Deben ser iguales')
+                return redirect(f'change_password/{token}/')
+            
+            user_obj = User.objects.get(id=user_id)
+            user_obj.set_password(new_password)
+            user_obj.save()
+            return redirect('logear')
+
+            
+  
+    except Exception as e:
+        print(e)
+    return render(request, 'login/Change.html')
+
+def modificar_user(request, id):
+    
+    usuario = get_object_or_404(User, id=id)
+
+    data={
+        'form':CustomUserCreationForm(instance=usuario)
+    }
+
+    if request.method=='POST':
+        formulario=CustomUserCreationForm(data=request.POST, instance=usuario)
+        if formulario.is_valid():
+            formulario.save()
+            user=authenticate(username=formulario.cleaned_data["username"], password=formulario.cleaned_data["password1"])
+            login(request, user)
+            messages.success(request, "Parametro Modificado")
+            #Redireccionar al Home
+            return redirect(to="Home")
+        data["form"]=formulario
+
+    return render(request, 'registro/mod_user.html', data)
+
+def listusuarios(request):
+    return render(request, 'login/list_user.html')

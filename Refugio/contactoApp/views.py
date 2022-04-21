@@ -3,7 +3,7 @@ from django.shortcuts import redirect, render
 from django.core.mail import EmailMessage
 from django.conf import settings
 from contactoApp.forms import FormularioContacto
-
+from django.contrib import messages
 
 # Create your views here.
 
@@ -27,8 +27,7 @@ def contacto(request):
             try:
 
                 email.send()
-
-                return render(request, "contacto/gracias.html")
+                messages.success(request, "Enviado correctamente! Gracias por contactarnos!")
             
             except:
 

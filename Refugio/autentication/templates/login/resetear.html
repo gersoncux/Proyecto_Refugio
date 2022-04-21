@@ -1,0 +1,39 @@
+{% extends "RefugiowebApp/base.html" %}
+
+{% load static %} 
+
+{% load crispy_forms_tags %}
+
+{% block content %} 
+
+
+
+<div class="continer">
+    <form action="" method="POST">
+        
+        <br>
+        <br>
+        
+        <h2 style="color: white; text-align: center;">Restablecer Contraseña</h2>
+        <h4 style="color: white; text-align: center;">Ingrese su nombre de Usuario</h4>
+
+       
+
+        {% csrf_token %} 
+
+        <div class="form-froup" style="width: 35%; margin: auto;">
+            <label for="password" style="color: white;">Username</label>
+            <input type="text" name="username" class="form-control">
+        </div>
+        <br>
+        <div style="margin: auto; text-align: center;">
+            <a style="color: white;" href="{% url 'logear' %}">Iniciar Sesion |</a>
+            <button class="btn btn-success" type="submit" >Enviar</button>
+        </div>
+    </form>
+</div>
+<br>
+<br>
+
+
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends "RefugiowebApp/base.html" %}
+
+{% load static %} 
+
+
+{% block content %} 
+     
+    <br>
+    <div>
+        <h1 style="text-align: center; color: aliceblue;"> 
+            Enviado Correctamente!
+        </h1>
+    </div>
+    <br>
+    <br>
+    <div style="text-align: center;">
+        <a href="{% url 'agregar' %}" class="btn btn-primary">Agregar Nueva Mascota</a>
+        <a href="{% url 'listar' %}" class="btn btn-primary">Ir a Lista de Mascotas</a>
+        <a href="{% url 'Albergue' %}" class="btn btn-primary">Ir al Albergue</a>
+    </div>
+
+    <br>
+    <br>
+
+
+{% endblock %}

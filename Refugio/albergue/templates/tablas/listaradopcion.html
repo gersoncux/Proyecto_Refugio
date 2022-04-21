@@ -1,0 +1,58 @@
+{% extends "RefugiowebApp/base.html" %}
+
+{% load static %} 
+
+
+
+{% block content %} 
+
+
+<br>
+<br>
+<br>
+
+<div class="card">
+    <div class="card-body">
+        <h2>Listado de Solicitudes de Adopcion</h2>
+        <hr>
+        <table class="table table-striped table-hover table-responsive-sm">
+            <tr>
+                <th>Nombre</th>
+                <th>Nombre Mascota</th>
+                <th>Estado</th>
+                <td>Opciones</td>
+            </tr>
+        
+            {% for adopcion in entity %}
+        
+                <tr>
+                    <td>{{ adopcion.nombre | title }}</td>
+                    <td>{{ adopcion.nombre_mascota | title }}</td>
+                    <td>
+                        {% if adopcion.estado %}
+                        Aprobado
+                        {% else %}
+                        NO Aprobado
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if perms.albergue.change_adopcion %}
+                        <a href="{% url 'modificar_solicitud' adopcion.id %}" class="btn btn-info btn-sm">modificar</a>
+                        {% endif %}
+                        {% if perms.albergue.elete_adopcion %}
+                        <a href="{% url 'eliminar_solicitud' adopcion.id %}" class="btn btn-danger btn-sm">eliminar</a>
+                        {% endif %}
+                    </td>
+                </tr>
+        
+            {% endfor %}
+        
+        </table>
+        <div>
+            {% include 'tablas/paginator.html' %}
+        </div>
+    </div>
+</div>
+
+<br><br>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends "RefugiowebApp/base.html" %}
+
+{% load static %} 
+
+{% load crispy_forms_tags %}
+
+{% block content %} 
+<div class="continer">
+    <form method="POST" class="form" id="form">{% csrf_token %}
+
+    <br>
+    <h4 style="color: white; text-align: center;">Cambio de Contraseña</h4>
+
+    <div class="form-group" style="width: 35%; margin: auto;">
+        <label for="password" style="color: white;">Password</label>
+        <input type="text" name="new_passsword" class="form-control"> 
+    </div>
+
+    <div class="form-group" style="width: 35%; margin: auto;">
+        <label for="password" style="color: white;">Re confirm password</label>
+        <input type="text" name="reconfirm_passsword" class="form-control"> 
+    </div>
+
+    <input type="hidden" name="user_id" value="{{user_id}}">
+
+    <br>
+
+    <div style="margin: auto; text-align: center;">
+        <button class="btn" type="submit" >Enviar</button>
+    </div>
+    </form>
+</div>
+<br>
+
+{% endblock %}

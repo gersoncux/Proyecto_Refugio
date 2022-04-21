@@ -24,4 +24,5 @@ urlpatterns = [
     path('', include('RefugiowebApp.urls')),
     path('contacto/', include('contactoApp.urls')),
     path('autentication/', include('autentication.urls')),
+    path('Albergue/', include('albergue.urls'),)
 ]

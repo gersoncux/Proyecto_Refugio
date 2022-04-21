@@ -1,0 +1,39 @@
+{% extends "RefugiowebApp/base.html" %}
+
+{% load static %} 
+
+
+{% block content %} 
+
+<br>
+<h1 style="color: white; text-align: center;">Mascotas en el Albergue</h1> 
+<br>
+
+<div class="container">
+    <div class="row">
+
+{% for mascota in mascotas %} 
+    {% if mascota.disponibilidad %}
+        <div class="col-md-3">
+            <div class="card" style="width: 80%;margin: 10px 10px;">
+                    {% if mascota.imagen %}
+                    <img src="{{mascota.imagen.url}}" class="card-img-top">
+                    {% endif %}
+                    <div class="card-body" style="text-align: center;">
+                        <h7 class="card-title">{{mascota.nombre}}</h7>
+                        <p class="card-text">{{mascota.sexo_mascota}}</p>
+                        <p class="card-text">{{mascota.categorias}}</p>
+                    </div>
+            </div>
+        </div>
+    {% endif %}
+
+{% endfor %}
+
+    </div>
+
+</div>
+
+
+
+{% endblock %}

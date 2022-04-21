@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -27,6 +28,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+MESSAGE_STORAGE = "django.contrib.messages.storage.cookie.CookieStorage"
 
 # Application definition
 
@@ -41,9 +43,14 @@ INSTALLED_APPS = [
     'contactoApp',
     'autentication',
     'crispy_forms',
+    'albergue',
+    'multiselectfield',
 ]
 
+
+
 MIDDLEWARE = [
+    # The following is the list of default middleware in new Django projects.
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -52,6 +59,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+
 
 ROOT_URLCONF = 'Refugio.urls'
 
@@ -80,7 +89,7 @@ WSGI_APPLICATION = 'Refugio.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'Proyecto',
+        'NAME': 'Refugio',
         'USER': 'postgres',
         'PASSWORD': 'Gabylu2312',
         'HOST': 'localhost',
@@ -124,6 +133,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = 'static/'
+
+LOGIN_REDIRECT_URL ='Home'
+
+LOGIN_URL = 'logear'
+
+MEDIA_URL='/media/'
+MEDIA_ROOT=os.path.join(BASE_DIR,'media')
 
 ##################################################################
 #Libreria para envio de emails

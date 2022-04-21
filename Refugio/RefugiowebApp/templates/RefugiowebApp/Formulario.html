@@ -1,9 +1,32 @@
 {% extends "RefugiowebApp/base.html" %}
 
+{% load crispy_forms_tags %}
+
 {% load static %} 
 
 
 {% block content %} 
+
+<h1 style="text-align: center; color: white;">FORMULARIO DE REGISTRO DE MASCOTA</h1>
+<div class="contenedroFormulario">
+    <form action="" class="formulario_contacto" method="POST" style="text-align: center;" enctype="multipart/form-data">
+
+    {% csrf_token %} 
+    <div style="color: white; text-align: center; width: 40%; margin: auto;"> 
+        <table>
+            {{ form | crispy }}
+        </table>
+    </div>
+    <div style="color: white;">
+        <br>
+        <button type="submit" id="btnEnviar" class="btn btn-success">Enviar</button>
+    </div>
+
+    </form>
+
+    {{ mensaje }}
+
+</div>
 
 
 {% endblock %}
