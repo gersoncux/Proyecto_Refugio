@@ -6,31 +6,29 @@
 
 {% block content %} 
 
+<br><br>
+<div class="row">
+    <div class="col-12 col-md-6 offset-md-3">
+        <div class="card">
+            <div class="card-body">
+                <h1>Restablecer Contraseña</h1>
+                <hr>
+                <form action="" method="POST">
+                    {% csrf_token %} 
 
-
-<div class="continer">
-    <form action="" method="POST">
-        
-        <br>
-        <br>
-        
-        <h2 style="color: white; text-align: center;">Restablecer Contraseña</h2>
-        <h4 style="color: white; text-align: center;">Ingrese su nombre de Usuario</h4>
-
-       
-
-        {% csrf_token %} 
-
-        <div class="form-froup" style="width: 35%; margin: auto;">
-            <label for="password" style="color: white;">Username</label>
-            <input type="text" name="username" class="form-control">
+                    <div class="form-froup" style="width: 50%; margin: auto;">
+                        <label for="password" >Nombre de Usuario</label>
+                        <input type="text" name="username" class="form-control">
+                    </div>
+                    <br>
+                    <div style="margin: auto; text-align: center;">
+                        <a href="{% url 'logear' %}">Iniciar Sesion |</a>
+                        <button class="btn btn-success" type="submit" >Enviar</button>
+                    </div>
+                </form>
+            </div>
         </div>
-        <br>
-        <div style="margin: auto; text-align: center;">
-            <a style="color: white;" href="{% url 'logear' %}">Iniciar Sesion |</a>
-            <button class="btn btn-success" type="submit" >Enviar</button>
-        </div>
-    </form>
+    </div>
 </div>
 <br>
 <br>

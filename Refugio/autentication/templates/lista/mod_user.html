@@ -1,0 +1,39 @@
+{% extends "RefugiowebApp/base.html" %}
+
+{% load static %} 
+
+
+{% block content %} 
+
+{% load crispy_forms_tags %}
+
+<br><br>
+        <div class="row">
+            <div class="col-12 col-md-6 offset-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h1>Editar Perfil</h1>
+                        <hr>
+                        <div>
+                            <a href="{% url 'Home' %}" class="btn btn-primary">Volver</a>
+                        </div>
+                        <hr>
+                        <form action="" class="formulario_contacto" method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {{ form | crispy }}
+                            <div class="d-flex justify-content-end">
+                                &nbsp;
+                                <input type="reset" value="Limpiar" class="btn btn-secondary">
+                                &nbsp;
+                                <button type="submit" id="btnEnviar" class="btn btn-success">Editar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+<br>
+<br>
+
+
+{% endblock %}

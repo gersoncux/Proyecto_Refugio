@@ -22,8 +22,9 @@
 
       {% if user.is_authenticated %}
 
-      Hola @{{ user.username }} &nbsp;&nbsp; <a href="{% url 'log_out' %}"style="color: white;">Cerrar Sesion | </a>
-       <a href="{% url 'mod_user' user.id  %}"style="color: white;">Editar Perfil </a>
+      Hola @{{ user.username }} &nbsp;&nbsp; <a href="{% url 'mod_user' user.id  %}"style="color: white;">Editar Perfil |</a>
+      <a href="{% url 'log_out' %}"style="color: white;">Cerrar Sesion </a>
+      
 
       {% else %} 
 

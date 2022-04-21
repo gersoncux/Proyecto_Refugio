@@ -10,6 +10,9 @@ from .forms import CustomUserCreationForm
 from django.contrib.auth.models import User
 from .helpers import send_forget_password_mail
 from .models import Profile
+from django.core.paginator import Paginator
+from django.http import Http404
+from django.contrib.auth.decorators import login_required, permission_required
 
 
 ################## Create your views here. #################################
@@ -119,6 +122,7 @@ def ChangePassword(request, token):
         print(e)
     return render(request, 'login/Change.html')
 
+
 def modificar_user(request, id):
     
     usuario = get_object_or_404(User, id=id)
@@ -138,7 +142,51 @@ def modificar_user(request, id):
             return redirect(to="Home")
         data["form"]=formulario
 
-    return render(request, 'registro/mod_user.html', data)
+    return render(request, 'lista/mod_user.html', data)
 
+@permission_required('auth.view_user')
 def listusuarios(request):
-    return render(request, 'login/list_user.html')
+    usuarios = User.objects.all()
+    page = request.GET.get('page', 1)
+    
+    try:
+        paginator = Paginator(usuarios, 5)
+        usuarios = paginator.page(page)
+    except:
+        raise Http404
+
+
+    data={
+        'entity': usuarios,
+        'paginator': paginator
+    }
+
+    return render(request, 'lista/list_user.html', data)
+
+@permission_required('auth.delete_user')
+def eliminar_usuario(request, id):
+    usuario = get_object_or_404(User, id=id)
+    usuario.delete()
+    messages.success(request, "Eliminado Correctamente")
+    return redirect(to="lista_usuarios")
+
+'''
+def modificar_user_Admin(request, id):
+    
+    usuario = get_object_or_404(User, id=id)
+
+    data={
+        'form':ModUserAdmin(instance=usuario)
+    }
+
+    if request.method=='POST':
+        formulario=ModUserAdmin(data=request.POST, instance=usuario)
+        if formulario.is_valid():
+            formulario.save()
+            user=authenticate(username=formulario.cleaned_data["username"], password=formulario.cleaned_data["password1"])
+            login(request, user)
+            messages.success(request, "Parametro Modificado")
+            #Redireccionar al Home
+            return redirect(to="Home")
+        data["form"]=formulario
+'''
