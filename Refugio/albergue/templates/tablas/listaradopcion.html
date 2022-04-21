@@ -39,7 +39,7 @@
                         {% if perms.albergue.change_adopcion %}
                         <a href="{% url 'modificar_solicitud' adopcion.id %}" class="btn btn-info btn-sm">modificar</a>
                         {% endif %}
-                        {% if perms.albergue.elete_adopcion %}
+                        {% if perms.albergue.delete_adopcion %}
                         <a href="{% url 'eliminar_solicitud' adopcion.id %}" class="btn btn-danger btn-sm">eliminar</a>
                         {% endif %}
                     </td>
