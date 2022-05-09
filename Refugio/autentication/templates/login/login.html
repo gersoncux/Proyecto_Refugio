@@ -15,6 +15,7 @@
                     <form method="post" action="">
                         {% csrf_token %} 
                             <div style="width: 50%; margin: auto;">
+
                                 {{form|crispy}}
                                 <a href="{% url 'autentication' %}">Registrate |</a>
                                 <button type="submit" class="btn btn-success">Login</button>

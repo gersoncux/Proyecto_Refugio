@@ -75,11 +75,11 @@ def ForgetPassword(request):
 
             user_obj = User.objects.get(username=username)
             token=str(uuid.uuid4())
-            profile_obj=Profile.objects.get(user=user_obj)
+            profile_obj=user_obj
             profile_obj.forget_password_token=token
             profile_obj.save()
             send_forget_password_mail(user_obj, token)
-            messages.success(request, 'An email is sent.')
+            messages.success(request, 'El correo fue enviadio exitosamente!')
             print("El email, fue enviado correctamente!!!")
             return render(request, 'login/Ecorreo.html' )
     except Exception as e:
@@ -104,11 +104,11 @@ def ChangePassword(request, token):
             user_id = request.POST.get('user_id')
 
             if user_id is None:
-                messages.success(request, 'No user id found.')
+                messages.success(request, 'Usuario no encontrado')
                 return redirect(f'change_password/{token}/')
 
             if new_password != confirm_password:
-                messages.success(request, 'Deben ser iguales')
+                messages.success(request, 'las password deben ser iguales')
                 return redirect(f'change_password/{token}/')
             
             user_obj = User.objects.get(id=user_id)
