@@ -27,7 +27,8 @@ SECRET_KEY = 'django-insecure-mq2-hoq=n+r=r_ml4_oj3mkx-tn)xmjp0b2*b^$27#rx9c1%08
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
+CSRF_TRUSTED_ORIGINS = ['http://*.localhost:8000','https://*.127.0.0.1:8000']
 
 MESSAGE_STORAGE = "django.contrib.messages.storage.cookie.CookieStorage"
 
@@ -88,16 +89,16 @@ WSGI_APPLICATION = 'Refugio.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 DATABASES = {
+    
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'Refugio',
-        'USER': 'postgres',
-        'PASSWORD': 'Gabylu2312',
-        'HOST': 'localhost',
-        'DATABASE_PORT':'5432',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.environ.get('DB_NAME'),
+        'USER': os.environ.get('DB_USER'),
+        'PASSWORD':os.environ.get('DB_PASSWORD'),
+        'HOST': os.environ.get('DB_HOST'),
+        
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -134,6 +135,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = 'static/'
+
+
+STATICFILES_DIRS =[
+   BASE_DIR / "static"
+]
+
+STATIC_ROOT = '/code/static/'
 
 LOGIN_REDIRECT_URL ='Home'
 

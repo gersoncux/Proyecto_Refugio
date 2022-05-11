@@ -1,0 +1,42 @@
+version: "3"
+
+services:
+  db:
+    image: postgres:12.9
+    environment:
+      - POSTGRES_DB=Refugion
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=Gabylu2312
+    ports:
+      - 5432
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+  
+  django_app:
+    build: .
+    environment:
+      - DB_HOST=db
+      - DB_NAME=Refugion
+      - DB_USER=postgres
+      - DB_PASSWORD=Gabylu2312
+
+    volumes:
+     - .:/code
+     - static:/code/static
+    depends_on:
+      - db
+    
+  nginx:
+    image: nginx:1.20
+    ports:
+      - 8000:80
+    volumes:
+      - ./config/nginx/conf.d:/etc/nginx/conf.d
+      - static:/code/static
+    depends_on:
+      - django_app
+
+volumes:
+  .:
+  postgres_data:
+  static:
