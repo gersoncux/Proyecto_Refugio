@@ -1,7 +1,13 @@
+from dataclasses import dataclass
+from django.views import View
+from django.views.generic import ListView
 from urllib.request import Request
-from django.http import Http404
+from django.http import Http404, HttpResponse
 from django.shortcuts import get_object_or_404, render, redirect, get_list_or_404
 from django.contrib.auth.decorators import login_required
+from sympy import content
+
+from .utils import render_to_pdf
 from .models import Mascota, Adopcion
 from RefugiowebApp.models import Datos
 from .forms import MascotaForm, AdopcionForm, AdopcionAdminForm, MascotaAddForm
@@ -147,3 +153,20 @@ def eliminar_solicitud(request, id):
     solicitud.delete()
     messages.success(request, "Eliminado Correctamente")
     return redirect(to="list_adopcion")
+
+
+class ListaMascotasView(ListView):
+    model = Mascota
+    template_name = "albergue/mascotas.html"
+    context_object_name = 'mascotas'
+
+class ListaMascotasPdf(View):
+
+    def get(self, request, *args, **kwargs):
+        mascotas = Mascota.objects.all()
+        data = {
+
+            'mascotas' : mascotas
+        }
+        pdf = render_to_pdf('albergue/lista_pdf.html', data)
+        return HttpResponse(pdf, content_type='application/pdf')

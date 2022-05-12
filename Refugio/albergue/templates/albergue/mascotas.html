@@ -3,7 +3,6 @@
 {% load static %} 
 
 
-
 {% block content %} 
 
 
@@ -15,10 +14,6 @@
     <div class="card-body">
         <h1>Listado de Mascotas</h1>
         <hr>
-        <div>
-            <a href="{% url 'documento' %}" class="btn btn-primary">Generar listado pdf</a>
-        </div>
-        <hr>
         <table class="table table-striped table-hover table-responsive-sm">
             <tr>
                 <th>Nombre</th>
@@ -27,10 +22,9 @@
                 <th>Alimentacion</th>
                 <th>Raza</th>
                 <th>Sexo de mascota</th>
-                <th>Opciones</th>
             </tr>
         
-            {% for mascota in entity %}
+            {% for mascota in mascotas %}
         
                 <tr>
                     <td>{{ mascota.nombre | title }}</td>
@@ -45,14 +39,6 @@
                     <td>{{ mascota.alimentacion | title }}</td>
                     <td>{{ mascota.raza | title }}</td>
                     <td>{{ mascota.sexo_mascota | title }}</td>
-                    <td>
-                        {% if perms.albergue.change_mascota %}
-                        <a href="{% url 'modificar_mascota' mascota.id %}" class="btn btn-info btn-sm">modificar</a>
-                        {% endif %}
-                        {% if perms.albergue.delete_mascota %}
-                        <a href="{% url 'eliminar_mascota' mascota.id %}" class="btn btn-danger btn-sm">eliminar</a>
-                        {% endif %}
-                    </td>
                 </tr>
         
             {% endfor %}
@@ -65,4 +51,6 @@
 </div>
 
 <br><br>
+
 {% endblock %}
+

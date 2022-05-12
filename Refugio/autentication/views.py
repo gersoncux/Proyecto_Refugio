@@ -13,7 +13,9 @@ from .models import Profile
 from django.core.paginator import Paginator
 from django.http import Http404
 from django.contrib.auth.decorators import login_required, permission_required
-
+from django.views import View
+from .utils import render_to_pdf
+from django.http import HttpResponse
 
 ################## Create your views here. #################################
 
@@ -190,3 +192,15 @@ def modificar_user_Admin(request, id):
             return redirect(to="Home")
         data["form"]=formulario
 '''
+
+class ListaUsuariosPdf(View):
+
+    def get(self, request, *args, **kwargs):
+        usuarios = User.objects.all()
+        data = {
+            'count': usuarios.count(),
+            'usuarios' : usuarios
+        }
+        pdf = render_to_pdf('lista/documento_pdf.html', data)
+        return HttpResponse(pdf, content_type='application/pdf')
+

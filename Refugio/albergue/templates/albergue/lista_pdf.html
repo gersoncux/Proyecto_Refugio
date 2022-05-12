@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-9">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h3>Lista de Mascotas</h3>
+    <hr>
+    <table class="table table-striped table-hover table-responsive-sm">
+        <tr>
+            <th>Nombre</th>
+            <th>Categorias</th>
+            <th>Disponibilidad</th>
+            <th>Alimentacion</th>
+            <th>Raza</th>
+            <th>Sexo de mascota</th>
+        </tr>
+    
+        {% for mascota in mascotas %}
+    
+            <tr>
+                <td>{{ mascota.nombre | title }}</td>
+                <td>{{ mascota.categorias | title }}</td>
+                <td>
+                    {% if mascota.disponibilidad %}
+                    Si
+                    {% else %}
+                    NO
+                    {% endif %}
+                </td>
+                <td>{{ mascota.alimentacion | title }}</td>
+                <td>{{ mascota.raza | title }}</td>
+                <td>{{ mascota.sexo_mascota | title }}</td>
+            </tr>
+    
+        {% endfor %}
+    
+    </table>
+</body>
+
+</html>

@@ -3,7 +3,7 @@ from tokenize import Name
 from unicodedata import name
 from django.urls import path
 from .views import  ChangePassword, registro, cerrar_sesion, logear, Ecorreo
-from .views import ForgetPassword, modificar_user, listusuarios, eliminar_usuario
+from .views import ForgetPassword, modificar_user, listusuarios, eliminar_usuario, ListaUsuariosPdf
 
 
 
@@ -20,4 +20,5 @@ urlpatterns = [
     path('lista_usarios/', listusuarios, name="lista_usuarios"),
     path('elimiar-solicitud/<id>/', eliminar_usuario, name="eliminar_usuario"),
     #path('editar_usuario/<id>/', modificar_user_Admin, name="mod_userAdmin"),
+    path('Doc/', ListaUsuariosPdf.as_view(), name="documento_pdf"), 
 ]
