@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-mq2-hoq=n+r=r_ml4_oj3mkx-tn)xmjp0b2*b^$27#rx9c1%08
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
-CSRF_TRUSTED_ORIGINS = ['http://*.localhost:8000','https://*.127.0.0.1:8000']
+CSRF_TRUSTED_ORIGINS = ['http://*.localhost:8000','https://*.127.0.0.1:8000','http://*.54.88.175.131:8000/']
 
 MESSAGE_STORAGE = "django.contrib.messages.storage.cookie.CookieStorage"
 
